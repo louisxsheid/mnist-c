@@ -1,3 +1,19 @@
+# Ignore object files
+*.o
+
+# Ignore the build directory where object files are stored
+build/
+
+# Ignore the executable produced by the build
+mnist_nn
+
+# Ignore binary files (for example, trained weights)
+*.bin
+
+# Ignore temporary files and backups
+*~
+*.swp
+*.bak
+
+# Ignore OS-specific files
 .DS_Store
-mnist_output
-trained_weights.bin
