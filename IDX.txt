@@ -43,3 +43,4 @@ Image files (IDX3):
 	•	Data:
         •	Each image: 784 bytes (28×28)
         •	Pixel values: 0–255
+
