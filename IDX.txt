@@ -1,0 +1,45 @@
+Structure
+1. Header
+2. Data
+
+HEADER
+[Magic number: 4 bytes]  
+[Dimension sizes: 4 × num_dimensions bytes] 
+
+DATA
+[Raw data: element_size × product(dimensions)]
+
+
+IDX dataset is big-endian
+Apple Silicon is little-endian
+
+Endian checker:
+int is_little_endian() {
+    unsigned int x = 1;
+    return *((char*)&x) == 1;
+}
+
+Big->little endian converter
+int read_big_endian_int(FILE *f) {
+    unsigned char bytes[4];
+    fread(bytes, 1, 4, f);
+    return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
+}
+
+
+Label files (IDX1):
+	•	Header:
+	    •	4 bytes: magic number (0x00000801)
+	    •	4 bytes: number of labels (e.g. 60,000)
+	•	Data:
+	    •	Each label: 1 byte (0–9)
+
+Image files (IDX3):
+	•	Header:
+        •	4 bytes: magic number (0x00000803)
+        •	4 bytes: number of images
+        •	4 bytes: number of rows (should be 28)
+        •	4 bytes: number of columns (should be 28)
+	•	Data:
+        •	Each image: 784 bytes (28×28)
+        •	Pixel values: 0–255
